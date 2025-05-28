@@ -7,7 +7,7 @@ variable "deletion_protection" {
 variable "name" {
   description = "Name of the SmartCaptcha"
   type        = string
-  default     = ""
+  default     = "demo-captcha-simple"
 }
 
 variable "complexity" {
