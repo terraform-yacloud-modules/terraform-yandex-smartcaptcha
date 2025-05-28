@@ -1,4 +1,4 @@
-module "clickhouse" {
+module "smartcaptcha" {
   source = "../../"
 
   deletion_protection = false
