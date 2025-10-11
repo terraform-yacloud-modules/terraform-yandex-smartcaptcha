@@ -7,7 +7,7 @@ variable "deletion_protection" {
 variable "name" {
   description = "Name of the SmartCaptcha"
   type        = string
-  default     = ""
+  default     = "demo-captcha-simple"
 }
 
 variable "complexity" {
@@ -15,8 +15,8 @@ variable "complexity" {
   type        = string
   default     = "HARD"
   validation {
-    condition     = contains(["EASY", "MEDIUM", "HARD"], var.complexity)
-    error_message = "Complexity must be one of: EASY, MEDIUM, HARD."
+    condition     = contains(["EASY", "MEDIUM", "HARD", "FORCE_HARD"], var.complexity)
+    error_message = "Complexity must be one of: EASY, MEDIUM, HARD, FORCE_HARD."
   }
 }
 
