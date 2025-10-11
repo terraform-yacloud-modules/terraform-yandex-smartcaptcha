@@ -10,7 +10,7 @@ to give users references for how to use the module(s) as well as testing/validat
 module. If contributing to the project, please be sure to make any appropriate updates to the relevant examples to allow
 maintainers to test your changes and to keep the examples up to date for users. Thank you!
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -42,13 +42,13 @@ No modules.
 | <a name="input_challenge_type"></a> [challenge\_type](#input\_challenge\_type) | Challenge type for the captcha | `string` | `"IMAGE_TEXT"` | no |
 | <a name="input_complexity"></a> [complexity](#input\_complexity) | Complexity level of the captcha | `string` | `"HARD"` | no |
 | <a name="input_deletion_protection"></a> [deletion\_protection](#input\_deletion\_protection) | Enable deletion protection for SmartCaptcha | `bool` | `true` | no |
-| <a name="input_name"></a> [name](#input\_name) | Name of the SmartCaptcha | `string` | `""` | no |
+| <a name="input_name"></a> [name](#input\_name) | Name of the SmartCaptcha | `string` | `"demo-captcha-simple"` | no |
 | <a name="input_pre_check_type"></a> [pre\_check\_type](#input\_pre\_check\_type) | Pre-check type for the captcha | `string` | `"SLIDER"` | no |
 
 ## Outputs
 
 No outputs.
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->
 
 ## License
 
