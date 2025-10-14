@@ -44,6 +44,7 @@ No modules.
 | <a name="input_deletion_protection"></a> [deletion\_protection](#input\_deletion\_protection) | Enable deletion protection for SmartCaptcha | `bool` | `true` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name of the SmartCaptcha | `string` | `"demo-captcha-simple"` | no |
 | <a name="input_pre_check_type"></a> [pre\_check\_type](#input\_pre\_check\_type) | Pre-check type for the captcha | `string` | `"SLIDER"` | no |
+| <a name="input_timeouts"></a> [timeouts](#input\_timeouts) | Timeout settings for cluster operations | <pre>object({<br/>    create = optional(string)<br/>    update = optional(string)<br/>    delete = optional(string)<br/>  })</pre> | `null` | no |
 
 ## Outputs
 

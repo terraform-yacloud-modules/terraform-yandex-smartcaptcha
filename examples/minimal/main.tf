@@ -10,4 +10,12 @@ module "smartcaptcha" {
     "example.com",
     "example.ru"
   ]
+
+  timeouts = {
+    create = "40m"
+    update = "40m"
+    delete = "40m"
+  }
+
+
 }
