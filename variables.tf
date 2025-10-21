@@ -40,8 +40,89 @@ variable "challenge_type" {
   }
 }
 
+variable "folder_id" {
+  description = "ID of the folder to create a captcha in. If omitted, the provider folder is used"
+  type        = string
+  default     = null
+}
+
 variable "allowed_sites" {
   description = "List of allowed sites for the captcha"
   type        = list(string)
   default     = []
+}
+
+variable "style_json" {
+  description = "JSON with variables to define the captcha appearance"
+  type        = string
+  default     = null
+}
+
+variable "turn_off_hostname_check" {
+  description = "Turn off hostname check"
+  type        = bool
+  default     = false
+}
+
+variable "security_rule" {
+  description = "List of security rules for the captcha"
+  type = list(object({
+    name                  = string
+    priority              = number
+    description           = optional(string)
+    override_variant_uuid = string
+    condition = optional(object({
+      host = optional(object({
+        hosts = list(object({
+          exact_match = optional(string)
+        }))
+      }))
+      uri = optional(object({
+        path = optional(object({
+          prefix_match = optional(string)
+        }))
+        queries = optional(list(object({
+          key = string
+          value = object({
+            pire_regex_match     = optional(string)
+            pire_regex_not_match = optional(string)
+          })
+        })))
+      }))
+      headers = optional(list(object({
+        name = string
+        value = object({
+          pire_regex_match     = optional(string)
+          pire_regex_not_match = optional(string)
+        })
+      })))
+      source_ip = optional(object({
+        ip_ranges_match = optional(object({
+          ip_ranges = list(string)
+        }))
+        ip_ranges_not_match = optional(object({
+          ip_ranges = list(string)
+        }))
+        geo_ip_match = optional(object({
+          locations = list(string)
+        }))
+        geo_ip_not_match = optional(object({
+          locations = list(string)
+        }))
+      }))
+    }))
+  }))
+  default = []
+}
+
+variable "override_variant" {
+  description = "List of override variants for security rules"
+  type = list(object({
+    uuid           = string
+    complexity     = string
+    pre_check_type = string
+    challenge_type = string
+    description    = optional(string)
+  }))
+  default = []
 }
