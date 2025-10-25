@@ -18,6 +18,8 @@ module "smartcaptcha_advanced" {
     backgroundColor = "#FFFFFF"
     textColor       = "#333333"
     buttonColor     = "#007bff"
+    borderRadius    = "8px"
+    fontFamily      = "Arial, sans-serif"
   })
 
   override_variant = [
@@ -34,6 +36,13 @@ module "smartcaptcha_advanced" {
       pre_check_type = "SLIDER"
       challenge_type = "KALEIDOSCOPE"
       description    = "Hard variant for suspicious traffic"
+    },
+    {
+      uuid           = "variant-3"
+      complexity     = "FORCE_HARD"
+      pre_check_type = "SLIDER"
+      challenge_type = "SILHOUETTES"
+      description    = "Force hard variant for very suspicious traffic"
     }
   ]
 
@@ -60,6 +69,51 @@ module "smartcaptcha_advanced" {
         source_ip = {
           geo_ip_match = {
             locations = ["ru", "kz", "by"]
+          }
+        }
+      }
+    },
+    {
+      name                  = "hard-for-suspicious-headers"
+      priority              = 30
+      description           = "Hard captcha for requests with suspicious headers"
+      override_variant_uuid = "variant-3"
+      condition = {
+        headers = [
+          {
+            name = "User-Agent"
+            value = {
+              pire_regex_match = ".*bot.*|.*crawler.*"
+            }
+          }
+        ]
+      }
+    },
+    {
+      name                  = "block-unknown-referers"
+      priority              = 40
+      description           = "Block requests from unknown referers"
+      override_variant_uuid = "variant-3"
+      condition = {
+        headers = [
+          {
+            name = "Referer"
+            value = {
+              pire_regex_not_match = ".*example\\.com.*|.*test\\.ru.*"
+            }
+          }
+        ]
+      }
+    },
+    {
+      name                  = "api-path-hard-captcha"
+      priority              = 50
+      description           = "Hard captcha for API endpoints"
+      override_variant_uuid = "variant-2"
+      condition = {
+        uri = {
+          path = {
+            prefix_match = "/api/"
           }
         }
       }
