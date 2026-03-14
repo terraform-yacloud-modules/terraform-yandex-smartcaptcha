@@ -1,3 +1,7 @@
+## v0.20.0 - 2026-03-14
+### Miscellaneous
+- 33d4747 support disallow_data_processing ([#19](https://github.com/terraform-yacloud-modules/terraform-yandex-smartcaptcha/pull/19))
+
 ## v0.19.0 - 2026-03-02
 ### Chores
 - d6bf96e chore(deps): bump hashicorp/setup-terraform from 3 to 4
