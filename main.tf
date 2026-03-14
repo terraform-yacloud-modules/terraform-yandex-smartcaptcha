@@ -1,13 +1,16 @@
 resource "yandex_smartcaptcha_captcha" "this" {
-  deletion_protection     = var.deletion_protection
-  name                    = var.name
-  complexity              = var.complexity
-  pre_check_type          = var.pre_check_type
-  challenge_type          = var.challenge_type
-  folder_id               = local.folder_id
-  allowed_sites           = var.allowed_sites
-  style_json              = var.style_json
-  turn_off_hostname_check = var.turn_off_hostname_check
+  deletion_protection      = var.deletion_protection
+  name                     = var.name
+  description              = var.description
+  complexity               = var.complexity
+  pre_check_type           = var.pre_check_type
+  challenge_type           = var.challenge_type
+  folder_id                = local.folder_id
+  allowed_sites            = var.allowed_sites
+  style_json               = var.style_json
+  turn_off_hostname_check  = var.turn_off_hostname_check
+  disallow_data_processing = var.disallow_data_processing
+  labels                   = var.labels
 
   dynamic "security_rule" {
     for_each = var.security_rule
@@ -26,7 +29,12 @@ resource "yandex_smartcaptcha_captcha" "this" {
               dynamic "hosts" {
                 for_each = host.value.hosts
                 content {
-                  exact_match = hosts.value.exact_match
+                  exact_match          = hosts.value.exact_match
+                  exact_not_match      = hosts.value.exact_not_match
+                  pire_regex_match     = hosts.value.pire_regex_match
+                  pire_regex_not_match = hosts.value.pire_regex_not_match
+                  prefix_match         = hosts.value.prefix_match
+                  prefix_not_match     = hosts.value.prefix_not_match
                 }
               }
             }
@@ -38,7 +46,12 @@ resource "yandex_smartcaptcha_captcha" "this" {
               dynamic "path" {
                 for_each = uri.value.path != null ? [uri.value.path] : []
                 content {
-                  prefix_match = path.value.prefix_match
+                  exact_match          = path.value.exact_match
+                  exact_not_match      = path.value.exact_not_match
+                  pire_regex_match     = path.value.pire_regex_match
+                  pire_regex_not_match = path.value.pire_regex_not_match
+                  prefix_match         = path.value.prefix_match
+                  prefix_not_match     = path.value.prefix_not_match
                 }
               }
 
@@ -47,8 +60,12 @@ resource "yandex_smartcaptcha_captcha" "this" {
                 content {
                   key = queries.value.key
                   value {
+                    exact_match          = queries.value.value.exact_match
+                    exact_not_match      = queries.value.value.exact_not_match
                     pire_regex_match     = queries.value.value.pire_regex_match
                     pire_regex_not_match = queries.value.value.pire_regex_not_match
+                    prefix_match         = queries.value.value.prefix_match
+                    prefix_not_match     = queries.value.value.prefix_not_match
                   }
                 }
               }
@@ -60,8 +77,12 @@ resource "yandex_smartcaptcha_captcha" "this" {
             content {
               name = headers.value.name
               value {
+                exact_match          = headers.value.value.exact_match
+                exact_not_match      = headers.value.value.exact_not_match
                 pire_regex_match     = headers.value.value.pire_regex_match
                 pire_regex_not_match = headers.value.value.pire_regex_not_match
+                prefix_match         = headers.value.value.prefix_match
+                prefix_not_match     = headers.value.value.prefix_not_match
               }
             }
           }

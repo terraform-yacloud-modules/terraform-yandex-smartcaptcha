@@ -18,6 +18,21 @@ output "name" {
   value       = yandex_smartcaptcha_captcha.this.name
 }
 
+output "description" {
+  description = "Description of the captcha"
+  value       = yandex_smartcaptcha_captcha.this.description
+}
+
+output "labels" {
+  description = "Resource labels"
+  value       = yandex_smartcaptcha_captcha.this.labels
+}
+
+output "suspend" {
+  description = "Whether the captcha is in restricted mode"
+  value       = yandex_smartcaptcha_captcha.this.suspend
+}
+
 output "complexity" {
   description = "Complexity level of the captcha"
   value       = yandex_smartcaptcha_captcha.this.complexity

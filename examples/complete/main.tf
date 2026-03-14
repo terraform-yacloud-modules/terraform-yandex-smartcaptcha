@@ -1,12 +1,19 @@
 module "smartcaptcha_advanced" {
   source = "../../"
 
-  deletion_protection     = false
-  name                    = "demo-captcha-advanced"
-  complexity              = "MEDIUM"
-  pre_check_type          = "CHECKBOX"
-  challenge_type          = "SILHOUETTES"
-  turn_off_hostname_check = false
+  deletion_protection      = false
+  name                     = "demo-captcha-advanced"
+  description              = "Advanced SmartCaptcha with security rules"
+  complexity               = "MEDIUM"
+  pre_check_type           = "CHECKBOX"
+  challenge_type           = "SILHOUETTES"
+  turn_off_hostname_check  = false
+  disallow_data_processing = false
+
+  labels = {
+    env = "demo"
+    app = "smartcaptcha"
+  }
 
   allowed_sites = [
     "example.com",

@@ -10,6 +10,24 @@ variable "name" {
   default     = "demo-captcha-simple"
 }
 
+variable "description" {
+  description = "Optional description of the captcha"
+  type        = string
+  default     = null
+}
+
+variable "disallow_data_processing" {
+  description = "If true, Yandex team won't be able to read internal data"
+  type        = bool
+  default     = false
+}
+
+variable "labels" {
+  description = "Resource labels as key:value pairs"
+  type        = map(string)
+  default     = {}
+}
+
 variable "complexity" {
   description = "Complexity level of the captcha"
   type        = string
@@ -74,26 +92,44 @@ variable "security_rule" {
     condition = optional(object({
       host = optional(object({
         hosts = list(object({
-          exact_match = optional(string)
+          exact_match          = optional(string)
+          exact_not_match      = optional(string)
+          pire_regex_match     = optional(string)
+          pire_regex_not_match = optional(string)
+          prefix_match         = optional(string)
+          prefix_not_match     = optional(string)
         }))
       }))
       uri = optional(object({
         path = optional(object({
-          prefix_match = optional(string)
+          exact_match          = optional(string)
+          exact_not_match      = optional(string)
+          pire_regex_match     = optional(string)
+          pire_regex_not_match = optional(string)
+          prefix_match         = optional(string)
+          prefix_not_match     = optional(string)
         }))
         queries = optional(list(object({
           key = string
           value = object({
+            exact_match          = optional(string)
+            exact_not_match      = optional(string)
             pire_regex_match     = optional(string)
             pire_regex_not_match = optional(string)
+            prefix_match         = optional(string)
+            prefix_not_match     = optional(string)
           })
         })))
       }))
       headers = optional(list(object({
         name = string
         value = object({
+          exact_match          = optional(string)
+          exact_not_match      = optional(string)
           pire_regex_match     = optional(string)
           pire_regex_not_match = optional(string)
+          prefix_match         = optional(string)
+          prefix_not_match     = optional(string)
         })
       })))
       source_ip = optional(object({
