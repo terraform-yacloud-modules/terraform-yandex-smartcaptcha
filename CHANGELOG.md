@@ -1,3 +1,7 @@
+## v0.21.0 - 2026-08-29
+### Chores
+- 6ad4192 chore(deps): bump actions/cache from 5.0.3 to 5.0.5 ([#21](https://github.com/terraform-yacloud-modules/terraform-yandex-smartcaptcha/pull/21))
+
 ## v0.20.0 - 2026-03-14
 ### Miscellaneous
 - 33d4747 support disallow_data_processing ([#19](https://github.com/terraform-yacloud-modules/terraform-yandex-smartcaptcha/pull/19))
