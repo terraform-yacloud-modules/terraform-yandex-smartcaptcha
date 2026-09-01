@@ -1,3 +1,7 @@
+## v0.23.0 - 2026-09-01
+### Chores
+- fe0ee90 chore(deps): bump actions/checkout from 6 to 7 ([#23](https://github.com/terraform-yacloud-modules/terraform-yandex-smartcaptcha/pull/23))
+
 ## v0.22.0 - 2026-09-01
 ### Chores
 - c23d3ac chore(deps): bump actions/cache from 5.0.5 to 6.1.0 ([#22](https://github.com/terraform-yacloud-modules/terraform-yandex-smartcaptcha/pull/22))
