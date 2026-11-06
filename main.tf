@@ -26,8 +26,20 @@ resource "yandex_smartcaptcha_captcha" "this" {
           dynamic "host" {
             for_each = condition.value.host != null ? [condition.value.host] : []
             content {
+              dynamic "host_matcher" {
+                for_each = host.value.host_matcher != null ? [host.value.host_matcher] : []
+                content {
+                  exact_match          = host_matcher.value.exact_match
+                  exact_not_match      = host_matcher.value.exact_not_match
+                  pire_regex_match     = host_matcher.value.pire_regex_match
+                  pire_regex_not_match = host_matcher.value.pire_regex_not_match
+                  prefix_match         = host_matcher.value.prefix_match
+                  prefix_not_match     = host_matcher.value.prefix_not_match
+                }
+              }
+
               dynamic "hosts" {
-                for_each = host.value.hosts
+                for_each = host.value.hosts != null ? host.value.hosts : []
                 content {
                   exact_match          = hosts.value.exact_match
                   exact_not_match      = hosts.value.exact_not_match
@@ -134,4 +146,19 @@ resource "yandex_smartcaptcha_captcha" "this" {
       description    = override_variant.value.description
     }
   }
+
+  dynamic "timeouts" {
+    for_each = var.timeouts != null ? [var.timeouts] : []
+    content {
+      create = timeouts.value.create
+      update = timeouts.value.update
+      delete = timeouts.value.delete
+      read   = timeouts.value.read
+    }
+  }
+}
+
+data "yandex_smartcaptcha_captcha_keys" "this" {
+  count      = var.expose_server_key ? 1 : 0
+  captcha_id = yandex_smartcaptcha_captcha.this.id
 }
