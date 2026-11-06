@@ -82,6 +82,23 @@ variable "turn_off_hostname_check" {
   default     = false
 }
 
+variable "expose_server_key" {
+  description = "Whether to read and expose the captcha server key through the server_key output"
+  type        = bool
+  default     = false
+}
+
+variable "timeouts" {
+  description = "Custom timeouts for the captcha resource"
+  type = object({
+    create = optional(string)
+    update = optional(string)
+    delete = optional(string)
+    read   = optional(string)
+  })
+  default = null
+}
+
 variable "security_rule" {
   description = "List of security rules for the captcha"
   type = list(object({
@@ -91,7 +108,7 @@ variable "security_rule" {
     override_variant_uuid = string
     condition = optional(object({
       host = optional(object({
-        hosts = list(object({
+        host_matcher = optional(object({
           exact_match          = optional(string)
           exact_not_match      = optional(string)
           pire_regex_match     = optional(string)
@@ -99,6 +116,15 @@ variable "security_rule" {
           prefix_match         = optional(string)
           prefix_not_match     = optional(string)
         }))
+        # The API deprecated `hosts` in favor of `host_matcher`; kept for backward compatibility.
+        hosts = optional(list(object({
+          exact_match          = optional(string)
+          exact_not_match      = optional(string)
+          pire_regex_match     = optional(string)
+          pire_regex_not_match = optional(string)
+          prefix_match         = optional(string)
+          prefix_not_match     = optional(string)
+        })))
       }))
       uri = optional(object({
         path = optional(object({
