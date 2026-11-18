@@ -1,3 +1,7 @@
+## v0.24.0 - 2026-11-18
+### Miscellaneous
+- ded0d37 ci: run semver job only on push to main ([#25](https://github.com/terraform-yacloud-modules/terraform-yandex-smartcaptcha/pull/25))
+
 ## v0.23.0 - 2026-09-01
 ### Chores
 - fe0ee90 chore(deps): bump actions/checkout from 6 to 7 ([#23](https://github.com/terraform-yacloud-modules/terraform-yandex-smartcaptcha/pull/23))
