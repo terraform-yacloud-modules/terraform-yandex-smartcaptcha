@@ -9,6 +9,14 @@ module "smartcaptcha_advanced" {
   challenge_type           = "SILHOUETTES"
   turn_off_hostname_check  = false
   disallow_data_processing = false
+  expose_server_key        = true
+
+  timeouts = {
+    create = "10m"
+    update = "10m"
+    delete = "10m"
+    read   = "5m"
+  }
 
   labels = {
     env = "demo"
@@ -121,6 +129,19 @@ module "smartcaptcha_advanced" {
         uri = {
           path = {
             prefix_match = "/api/"
+          }
+        }
+      }
+    },
+    {
+      name                  = "host-matcher-hard-captcha"
+      priority              = 60
+      description           = "Hard captcha for hosts matched by a single matcher"
+      override_variant_uuid = "variant-3"
+      condition = {
+        host = {
+          host_matcher = {
+            pire_regex_not_match = ".*\\.example\\.com"
           }
         }
       }

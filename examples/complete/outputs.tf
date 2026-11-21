@@ -32,3 +32,14 @@ output "override_variants" {
   description = "Override variants configured for the SmartCaptcha"
   value       = module.smartcaptcha_advanced.override_variants
 }
+
+output "cloud_id" {
+  description = "ID of the cloud that the SmartCaptcha belongs to"
+  value       = module.smartcaptcha_advanced.cloud_id
+}
+
+output "server_key" {
+  description = "Server key of the SmartCaptcha"
+  value       = module.smartcaptcha_advanced.server_key
+  sensitive   = true
+}

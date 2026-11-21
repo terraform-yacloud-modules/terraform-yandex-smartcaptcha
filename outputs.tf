@@ -77,3 +77,14 @@ output "override_variants" {
   description = "List of override variants configured for the captcha"
   value       = yandex_smartcaptcha_captcha.this.override_variant
 }
+
+output "cloud_id" {
+  description = "ID of the cloud that the captcha belongs to"
+  value       = yandex_smartcaptcha_captcha.this.cloud_id
+}
+
+output "server_key" {
+  description = "Server key of the captcha. Populated only when expose_server_key is true"
+  value       = try(data.yandex_smartcaptcha_captcha_keys.this[0].server_key, null)
+  sensitive   = true
+}
