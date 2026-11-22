@@ -1,3 +1,7 @@
+## v0.25.0 - 2026-11-22
+### Features
+- 6d83d3f feat: add timeouts, host_matcher and server key support ([#24](https://github.com/terraform-yacloud-modules/terraform-yandex-smartcaptcha/pull/24))
+
 ## v0.24.0 - 2026-11-18
 ### Miscellaneous
 - ded0d37 ci: run semver job only on push to main ([#25](https://github.com/terraform-yacloud-modules/terraform-yandex-smartcaptcha/pull/25))
